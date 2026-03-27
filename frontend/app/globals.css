@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-green-400 font-mono;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-green-300;
+  }
+
+  a {
+    @apply text-green-500 hover:underline;
+  }
+}
