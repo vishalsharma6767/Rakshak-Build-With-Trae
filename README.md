@@ -1,4 +1,4 @@
-# RAKSHAK: AI-Powered Behavioral Cyber-Shield
+# RAKSHAK: AI-Powered Tool
 
 **Rakshak** (meaning 'Protector') is an advanced cybersecurity intelligence platform designed to detect, analyze, and explain phishing threats in real-time. Built for the next generation of web security, it combines **Behavioral Sandbox Simulation** with **Generative AI (Gemini 2.0)** to provide a human-readable safety report for any URL.
 
