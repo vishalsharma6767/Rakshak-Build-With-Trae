@@ -1,0 +1,44 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "services": [
+    {
+      "name": "sandbox",
+      "rootDirectory": "sandbox",
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "healthcheckPath": "/",
+        "healthcheckTimeout": 300
+      }
+    },
+    {
+      "name": "backend",
+      "rootDirectory": "backend",
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "healthcheckPath": "/",
+        "healthcheckTimeout": 300
+      }
+    },
+    {
+      "name": "frontend",
+      "rootDirectory": "frontend",
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile",
+        "buildArgs": {
+          "NEXT_PUBLIC_BACKEND_URL": "${NEXT_PUBLIC_BACKEND_URL}"
+        }
+      },
+      "deploy": {
+        "healthcheckPath": "/",
+        "healthcheckTimeout": 300
+      }
+    }
+  ]
+}

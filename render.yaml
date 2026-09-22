@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: rakshak-sandbox
+    runtime: node
+    rootDir: sandbox
+    plan: free
+    buildCommand: npm install
+    startCommand: node index.js
+    healthCheckPath: /
+
+  - type: web
+    name: rakshak-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: OPENROUTER_API_KEY
+        value: SK-or-REPLACE-ME
+        sync: false
+      - key: SANDBOX_URL
+        value: https://YOUR-SANDBOX-URL.onrender.com/simulate
+        sync: false
+
+  - type: web
+    name: rakshak-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    publishPath: out
+    envVars:
+      - key: NEXT_PUBLIC_BACKEND_URL
+        value: https://YOUR-BACKEND-URL.onrender.com
+        sync: false
