@@ -26,7 +26,7 @@ services:
 
   - type: web
     name: rakshak-frontend
-    runtime: static
+    runtime: node
     rootDir: frontend
     buildCommand: npm ci && npm run build
     publishPath: out
