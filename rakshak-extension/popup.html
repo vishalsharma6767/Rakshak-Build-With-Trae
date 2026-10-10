@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rakshak Security Check</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 420px;
+      overflow: hidden;
+      animation: popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .header {
+      background: linear-gradient(135deg, #ff6b35, #febc2e);
+      color: white;
+      padding: 20px 24px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      background: white;
+      color: #dc3545;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin: 20px 24px;
+      font-size: 18px;
+      min-width: 120px;
+      justify-content: center;
+    }
+
+    .score-badge.safe {
+      background: #28a745;
+      color: white;
+    }
+
+    .summary-card {
+      background: #f8f9fa;
+      border-left: 4px solid #6c757d;
+      padding: 16px 20px;
+      margin: 0 24px 20px;
+    }
+
+    .summary-card h3 {
+      font-size: 14px;
+      color: #6c757d;
+      margin-bottom: 8px;
+    }
+
+    .summary-card p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      padding: 0 24px 24px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #5a6268;
+    }
+
+    .btn-danger {
+      background: #ff6b35;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #e45a25;
+      transform: translateY(2px);
+      box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn:focus {
+      outline: 2px solid #667eea;
+      outline-offset: 2px;
+    }
+
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .safe-indicator {
+      background: #d4edda;
+      border: 1px solid #c8e6c9;
+      color: #155724;
+      padding: 12px 20px;
+      margin: 20px 24px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .safe-indicator.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="app">
+    <div class="header">
+      <h1>Rakshak Security</h1>
+      <p>Link Safety Analysis</p>
+    </div>
+
+    <div class="score-badge" id="scoreBadge">Checking...</div>
+
+    <div class="summary-card" id="summaryCard">
+      <h3>Summary</h3>
+      <p id="summaryText">Analyzing link safety...</p>
+    </div>
+
+    <div class="safe-indicator" id="safeIndicator">
+      <span>✓ This link appears to be safe</span>
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-secondary" id="ignoreBtn">Ignore & Continue</button>
+      <button class="btn btn-primary" id="reportBtn">Go to Rakshak Report</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
